@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Expression - Infix / Prefix to Postfix</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mx-auto h-full space-y-4 p-8">
+        <div class="font-bold text-center">
+            <h1 class="text-2xl">Convert Infix / Prefix to Postfix</h1>
+        </div>
+
+        <!-- Infix to Postfix -->
+        <div class="flex flex-col gap-4 rounded-base p-4 shadow-md">
+            <h2 class="text-lg font-bold">Infix → Postfix</h2>
+            <div class="flex flex-col gap-2">
+                <label for="value" class="block mb-2.5 text-sm font-medium text-heading">Infix</label>
+                <input type="text" id="value" class="bg-neutral-secondary-medium rounded-md border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="เช่น A+(B*C)" required />
+            </div>
+            <button id="push" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Convert Infix</button>
+            <div class="p-4 font-mono" id="output"></div>
+        </div>
+
+        <!-- Prefix to Postfix -->
+        <div class="flex flex-col gap-4 rounded-base p-4 shadow-md">
+            <h2 class="text-lg font-bold">Prefix → Postfix</h2>
+            <div class="flex flex-col gap-2">
+                <label for="prefixValue" class="block mb-2.5 text-sm font-medium text-heading">Prefix</label>
+                <input type="text" id="prefixValue" class="bg-neutral-secondary-medium rounded-md border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="เช่น *+AB-CD หรือ +*ABC" />
+            </div>
+            <button id="prefixBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Convert Prefix</button>
+            <div class="p-4 font-mono" id="prefixOutput"></div>
+        </div>
+
+        <!-- Flow Chart -->
+        <div class="flex flex-col md:flex-row md:justify-center gap-4 rounded-base p-4 shadow-md">
+            <div class="w-full md:w-1/2 mx-auto">
+                <h3 class="text-lg font-bold">Infix to Postfix</h3>
+                <img src="./assets/infix_to_postfix.png" alt="Flow Chart 1" class="w-full h-auto">
+            </div>
+            <div class="w-full md:w-1/2 mx-auto">
+                <h3 class="text-lg font-bold">Prefix to Postfix</h3>
+                <img src="./assets/prefix_to_postfix.png" alt="Flow Chart 2" class="w-full h-auto">
+            </div>
+        </div>
+
+    <script src="./expression.js"></script>
+    <script>
+        document.getElementById('value').value = expression;
+        document.getElementById('push').addEventListener('click', () => {
+            document.getElementById('output').innerHTML = infixToPostfix(document.getElementById('value').value).join('');
+        });
+        document.getElementById('prefixBtn').addEventListener('click', () => {
+            document.getElementById('prefixOutput').innerHTML = prefixToPostfix(document.getElementById('prefixValue').value.trim()) || '(ใส่ Prefix ด้านบน)';
+        });
+    </script>
+</body>
+</html>
