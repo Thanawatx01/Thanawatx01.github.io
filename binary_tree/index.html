@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>BST Visualizer</title>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-slate-50">
+  <main class="w-full max-w-5xl mx-auto p-5 md:p-7">
+    <div class="rounded-2xl border border-cyan-400/20 bg-slate-950/60 backdrop-blur px-5 md:px-7 py-6 shadow-lg">
+      <h1 class="text-2xl md:text-3xl font-bold tracking-tight">BST Visualizer (Animation)</h1>
+      <p class="mt-2 text-slate-300 text-sm md:text-base leading-relaxed">
+        ใส่ตัวเลขเพื่อสร้าง Binary Search Tree แล้วกด <span class="text-emerald-400 font-semibold">Search / Add / Delete</span> แบบหลายค่า
+        พร้อมแอนิเมชัน และ animate traversal: <span class="font-semibold">in-order</span>, <span class="font-semibold">pre-order</span>, <span class="font-semibold">post-order</span>
+      </p>
+
+      <div class="mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+          <div>
+            <label class="text-sm font-semibold text-slate-300">Build (multi)</label>
+            <input
+              data-role="buildInput"
+              type="text"
+              value="7, 3, 9, 1, 5, 8, 10"
+              placeholder="e.g. 7,3,9,1,5"
+              class="mt-2 w-full rounded-xl border border-slate-700 bg-slate-900/40 px-4 py-3 text-slate-100 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-cyan-400/30"
+            />
+          </div>
+          <button
+            data-role="buildButton"
+            type="button"
+            class="md:col-span-1 rounded-xl border border-cyan-400/40 bg-gradient-to-b from-cyan-300/95 to-cyan-500/95 px-6 py-3 font-semibold text-slate-900 shadow-sm hover:brightness-105 active:translate-y-px"
+          >
+            Build BST
+          </button>
+          <button
+            data-role="resetButton"
+            type="button"
+            class="rounded-xl border border-slate-700 bg-slate-900/30 px-6 py-3 font-semibold text-slate-200 shadow-sm hover:bg-slate-900/50 active:translate-y-px"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="rounded-xl border border-slate-700 bg-slate-900/35 p-4">
+          <label class="text-sm font-semibold text-slate-300">Search (multi)</label>
+          <input
+            data-role="searchInput"
+            type="text"
+            value="5, 6, 10"
+            placeholder="e.g. 5,6,10"
+            class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-900/40 px-3 py-2 text-slate-100 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-cyan-400/30"
+          />
+          <button
+            data-role="searchButton"
+            type="button"
+            class="mt-3 w-full rounded-lg bg-cyan-400/20 border border-cyan-400/40 px-3 py-2 font-semibold text-cyan-100 hover:bg-cyan-400/25 active:translate-y-px"
+          >
+            Search
+          </button>
+        </div>
+
+        <div class="rounded-xl border border-slate-700 bg-slate-900/35 p-4">
+          <label class="text-sm font-semibold text-slate-300">Add (multi)</label>
+          <input
+            data-role="addInput"
+            type="text"
+            value="6, 2"
+            placeholder="e.g. 6,2"
+            class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-900/40 px-3 py-2 text-slate-100 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-cyan-400/30"
+          />
+          <button
+            data-role="addButton"
+            type="button"
+            class="mt-3 w-full rounded-lg bg-emerald-400/20 border border-emerald-400/40 px-3 py-2 font-semibold text-emerald-100 hover:bg-emerald-400/25 active:translate-y-px"
+          >
+            Add
+          </button>
+        </div>
+
+        <div class="rounded-xl border border-slate-700 bg-slate-900/35 p-4">
+          <label class="text-sm font-semibold text-slate-300">Delete (multi)</label>
+          <input
+            data-role="deleteInput"
+            type="text"
+            value="3, 9"
+            placeholder="e.g. 3,9"
+            class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-900/40 px-3 py-2 text-slate-100 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-cyan-400/30"
+          />
+          <button
+            data-role="deleteButton"
+            type="button"
+            class="mt-3 w-full rounded-lg bg-rose-400/15 border border-rose-400/40 px-3 py-2 font-semibold text-rose-100 hover:bg-rose-400/20 active:translate-y-px"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex gap-2 flex-wrap">
+          <button data-role="inOrderButton" type="button" class="rounded-lg border border-slate-700 bg-slate-900/30 px-4 py-2 font-semibold text-slate-200 hover:bg-slate-900/50 active:translate-y-px">
+            Animate In-order
+          </button>
+          <button data-role="preOrderButton" type="button" class="rounded-lg border border-slate-700 bg-slate-900/30 px-4 py-2 font-semibold text-slate-200 hover:bg-slate-900/50 active:translate-y-px">
+            Animate Pre-order
+          </button>
+          <button data-role="postOrderButton" type="button" class="rounded-lg border border-slate-700 bg-slate-900/30 px-4 py-2 font-semibold text-slate-200 hover:bg-slate-900/50 active:translate-y-px">
+            Animate Post-order
+          </button>
+        </div>
+        <div class="min-h-[22px] text-rose-400 font-semibold" data-role="message"></div>
+      </div>
+
+      <div class="mt-4 rounded-xl border border-slate-700 bg-slate-900/35 p-4">
+        <div class="text-sm font-semibold text-slate-300">Traversal output (animated)</div>
+        <div class="mt-2 text-emerald-300/90 font-semibold break-all" data-role="traversalOutput">-</div>
+      </div>
+
+      <div class="mt-4 rounded-xl border border-slate-700 bg-slate-900/35 p-4 overflow-auto">
+        <div class="text-sm font-semibold text-slate-300">BST Graph</div>
+        <div class="mt-2 h-[420px] flex items-center justify-center" data-role="treeOutput">-</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./index.js"></script>
+</body>
+</html>
+
